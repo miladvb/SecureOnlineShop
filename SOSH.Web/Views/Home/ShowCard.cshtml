@@ -1,0 +1,39 @@
+@model Order
+@{
+    ViewData["Title"] = "Bascket Order";
+}
+
+
+@if (Model != null)
+{
+
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>Product</th>
+                <th>Total</th>
+                <th>Price</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.OrderDetails)
+            {
+                <tr>
+                    <td>@item.Product.Name</td>
+                    <td>@item.Count</td>
+                    <td>@(item.Count * item.Price)</td>
+                    <td>
+                        <a asp-action="RemoveCard" asp-controller="Home" asp-route-DetailId="@item.DetailId">ِRemove</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <h5>Sum Total : @Model.OrderDetails.Sum(x => x.Count * x.Price)</h5>
+    <a asp-action="Payment" asp-controller="Home" class="btn btn-success">Payment</a>
+}
+else
+{
+    <div class="alert alert-success">There is no invoice</div>
+}

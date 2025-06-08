@@ -1,0 +1,12 @@
+@{
+    ViewData["Title"] = "";
+}
+
+<h1>The message was sent successfully</h1>
+
+<div class="alert alert-success">
+    Dear @ViewBag.UserEmail, your message has been sent successfully.
+    <p>
+        You can send a new message through the <a asp-action="ContactUs" asp-controller="Home">Contact Us</a> page
+    </p>
+</div>

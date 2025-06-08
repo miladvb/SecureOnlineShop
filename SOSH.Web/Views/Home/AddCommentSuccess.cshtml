@@ -1,0 +1,12 @@
+@{
+    ViewData["Title"] = "";
+}
+
+<h1>The comment was sent successfully</h1>
+
+<div class="alert alert-success">
+    Dear @ViewBag.Email, your comment has been sent successfully and will be displayed after approval by the administrator.
+    <p>
+        You can send a new message through the <a asp-action="Detail" asp-controller="Home" asp-route-ItemId="@ViewBag.ProductId">product detail</a> page
+    </p>
+</div>

@@ -1,0 +1,64 @@
+@model IEnumerable<SOSH.Web.Models.ViewModels.CommentViewModel>
+
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Index";
+}
+
+<h1>List of comments</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CommentName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CommentText)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsPublished)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CommentName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CommentText)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsPublished)
+                </td>
+                <th>
+                    <a asp-action="Detail" asp-controller="Home" asp-route-ItemId="@item.ProductId"> @Html.DisplayFor(modelItem => item.ProductName)</a>
+
+                </th>
+                <td>
+                    <form asp-action="AcceptComment" asp-asp-controller="CommentManager" class="d-inline p-2">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" id="CommentId" name="CommentId" value="@item.CommentId" />
+                        <input type="submit" value="Accept" class="btn btn-success" />
+                    </form> |
+                    <a class="btn btn-primary" asp-action="Details" asp-route-id="@item.CommentId">Details</a> |
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.CommentId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

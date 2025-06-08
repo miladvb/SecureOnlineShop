@@ -1,0 +1,42 @@
+@model EditProductViewModel
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Delete Product";
+}
+
+
+<h1>Delete Product</h1>
+
+
+
+<div class="row">
+    <div class="col-4">
+        <form method="post">
+            @Html.HiddenFor(model => model.Id)
+            @Html.HiddenFor(model => model.Name)
+            @Html.HiddenFor(model => model.Description)
+            @Html.HiddenFor(model => model.Picture)
+            @Html.HiddenFor(model => model.Price)
+            @Html.HiddenFor(model => model.QuantityInStoke)
+
+            <dl>
+                <dd>Name</dd>
+                <dt>@Model.Name</dt>
+                <dd>Description</dd>
+                <dt>@Model.Description</dt>
+                <dd>Price</dd>
+                <dt>@Model.Price</dt>
+                <dd>Quantity In Stok</dd>
+                <dt>@Model.QuantityInStoke</dt>
+            </dl>
+            <div class="form-group mb-2">
+                <input type="submit" value="Delete Product" class="btn btn-danger" />
+            </div>
+
+        </form>
+    </div>
+    <div class="col-4">
+        <br />
+        <img src="~/Images/@ViewBag.imageName" class="img-thumbnail" width="300" />
+    </div>
+</div>

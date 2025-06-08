@@ -1,0 +1,70 @@
+@model SOSH.Web.Models.Contact
+@{
+    ViewData["Title"] = "Contact US";
+}
+
+<div class="row">
+
+    <div class="col-12">
+        <div class="jumbotron">
+            <h1 class="display-3">Welcome to my Eshop</h1>
+            <p class="lead">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusantium dicta, molestias in itaque distinctio exercitationem magni, quisquam tenetur culpa libero corrupti
+                minus quam, ratione dolorum cumque quae? Atque, in eum.</p>
+        </div>
+
+
+        <div class="row">
+            <div class="col-9">
+                <div class="card">
+                    <div class="card-header">
+                        Conctact Us Form
+                    </div>
+                    <div class="card-body">
+                        <form asp-action="CreateContact" asp-controller="Contact" method="post">
+                            @Html.AntiForgeryToken()
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-group">
+                                <label asp-for="Email" class="control-label"></label>
+                                <input asp-for="Email" class="form-control" />
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Name" class="control-label"></label>
+                                <input asp-for="Name" class="form-control" />
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Message" class="control-label"></label>
+                                <textarea asp-for="Message" class="form-control" rows="5"></textarea>
+                                <span asp-validation-for="Message" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Create" class="btn btn-primary" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-3">
+                <div class="card">
+                    <div class="card-header">
+                        Conctact Us
+                    </div>
+                    <div class="card-body">
+                        <p class="card-title">Contact the designer</p>
+                        <p class="card-text">+1 (123) 4525</p>
+                        <p class="card-text">Info@SOSH.com</p>
+                        <p class="card-text">#SOSH</p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    @section scripts
+    {
+        <partial name="_ValidationScriptsPartial" />
+    }

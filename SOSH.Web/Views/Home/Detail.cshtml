@@ -1,0 +1,103 @@
+@model SOSH.Web.Models.ViewModels.ProductDetailViewModel
+
+@{
+    ViewData["Title"] = "Product " + Model.product.Name;
+}
+
+<div>
+    <h1 class="display-5">@Model.product.Name</h1>
+    <hr />
+    <div class="row">
+        <div class="col-3">
+            <img src="~/Images/@Model.product.ImageName" alt="@Model.product.Name" class="img-thumbnail" height="320" width="320" />
+        </div>
+        <div class="col-9">
+
+            <p class="text-justify">@Model.product.Description</p>
+            <p>@Model.product.Item.Price</p>
+
+            <dl>
+                <h5>Categories</h5>
+                @foreach (var cat in Model.categories)
+                {
+                    <dt><a href="/Group/@cat.Id/@cat.Name">@cat.Name</a></dt>
+                    <dd>@cat.Description</dd>
+                }
+            </dl>
+
+            <div>
+                <a class="btn btn-primary" asp-action="AddToCard" asp-controller="Home" asp-route-ItemId="@Model.product.ItemId">Add To Card</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <h2>Comments</h2>
+    <div class="row">
+
+@if(Model.commentViewModels.Count==0)
+{
+            <div class="card-body">
+                <h5 class="card-title">    Be the first to write a comment for this product</h5>
+            </div>
+        
+}
+else
+{
+@foreach (var item in Model.commentViewModels)
+        {
+            <div class="col-md-12">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.CommentName</h5>
+                        <p class="card-text">@item.CommentText</p>
+                        <p class="card-text"><small class="text-muted">Posted by @item.Email</small></p>
+                    </div>
+                </div>
+            </div>
+        }
+}
+        
+
+    </div>
+</div>
+
+<div class="Card">
+    <div class="card-header">Add comment to this product</div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="CreateComment" method="post">
+                    @Html.AntiForgeryToken()
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="productComment.ProductId" id="ProductId" name="ProductId" value="@Model.product.ItemId" />
+                    <div class="form-group">
+                        <label asp-for="productComment.Email" class="control-label"></label>
+                        <input asp-for="productComment.Email" name="Email" id="Email" class="form-control" />
+                        <span asp-validation-for="productComment.Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="productComment.CommentName" class="control-label">Full Name </label>
+                        <input asp-for="productComment.CommentName" name="CommentName" id="CommentName" class="form-control" />
+                        <span asp-validation-for="productComment.CommentName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="productComment.CommentText" class="control-label"></label>
+                        <textarea asp-for="productComment.CommentText" name="CommentText" id="CommentText" class="form-control" rows="5"></textarea>
+                        <span asp-validation-for="productComment.CommentText" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Send Comment" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    @section scripts
+    {
+        <partial name="_ValidationScriptsPartial" />
+    }

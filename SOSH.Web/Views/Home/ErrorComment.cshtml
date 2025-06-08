@@ -1,0 +1,8 @@
+@model AddCommentViewModel
+
+<div class="alert alert-danger">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <p>
+        Please enter the correct information. <a asp-action="Detail" asp-controller="Home" asp-route-ItemId="@ViewBag.ProductId"> Return .</a>
+    </p>
+</div>

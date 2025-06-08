@@ -1,0 +1,32 @@
+@model IEnumerable<Product>
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Admin Page";
+}
+
+<h1>List of products <a asp-action="AddProduct" asp-controller="Admin" class="btn btn-primary">New Procuct</a></h1>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Picture</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td><img src="~/Images/@(item.ImageName)" class="img-thumbnail" width="200"></td>
+                <td>@item.Name</td>
+                <td>@item.Item.Price</td>
+                <td>
+                    <a asp-action="EditProduct" asp-controller="Admin" asp-route-Id="@item.Id" class="btn btn-link">Edit</a>
+                    <a asp-action="DeleteProduct" asp-controller="Admin" asp-route-Id="@item.Id" class="btn btn-link">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
