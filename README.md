@@ -107,10 +107,5 @@ All code should follow the [Microsoft C# style guide](https://learn.microsoft.co
 
 ---
 
-## License
-
-Distributed under the **MIT License**. See `LICENSE` for more information.
-
----
 
 
